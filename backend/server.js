@@ -10,7 +10,7 @@ mongoose
   .then(() => {
     console.log("Mongo conectado!");
 
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Servidor rodando!");
     });
   })
