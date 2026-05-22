@@ -4,7 +4,18 @@ import { messageQueue } from "../queues/messageQueue.js";
 
 import { randomDelay } from "../utils/randomDelay.js";
 
-export const createCampaign = async (req, res) => {
+const getCampaigns = async (req, res) => {
+  try {
+    const campaigns = await Campaign.find();
+
+    res.status(200).json(campaigns);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+const createCampaign = async (req, res) => {
   try {
     const { name, message, minDelay, maxDelay, contactIds } = req.body;
 
@@ -52,3 +63,5 @@ export const createCampaign = async (req, res) => {
     });
   }
 };
+
+export { createCampaign, getCampaigns };
