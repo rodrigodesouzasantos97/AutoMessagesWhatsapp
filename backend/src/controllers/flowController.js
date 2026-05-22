@@ -4,7 +4,18 @@ import FlowExecution from "../models/FlowExecution.js";
 
 import { messageQueue } from "../queues/messageQueue.js";
 
-export const createFlow = async (req, res) => {
+const getFlows = async (req, res) => {
+  try {
+    const flows = await Flow.find();
+
+    res.status(200).json(flows);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+const createFlow = async (req, res) => {
   try {
     const { name, steps } = req.body;
 
@@ -42,7 +53,7 @@ export const createFlow = async (req, res) => {
   }
 };
 
-export const startFlow = async (req, res) => {
+const startFlow = async (req, res) => {
   try {
     const { flowId } = req.params;
 
@@ -95,3 +106,5 @@ export const startFlow = async (req, res) => {
     });
   }
 };
+
+export { startFlow, createFlow, getFlows };
