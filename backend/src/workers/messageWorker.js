@@ -59,15 +59,15 @@ export const worker = new Worker(
 
       const execution = await FlowExecution.findById(executionId);
 
-      execution.status = "running";
-
-      await execution.save();
-
       if (!contact || !step || !execution) {
         console.log("Dados não encontrados");
 
         return;
       }
+
+      execution.status = "running";
+
+      await execution.save();
 
       // envia mensagem
       await sendMessage(contact.phone, step.message);
