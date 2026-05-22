@@ -15,6 +15,31 @@ export const worker = new Worker(
   async (job) => {
     console.log("JOB RECEBIDO");
 
+    const { type } = job.data;
+
+    // campanha
+    if (type === "campaign") {
+      const {
+        contactId,
+        message,
+      } = job.data;
+
+      const contact =
+        await Contact.findById(contactId);
+
+      if (!contact) {
+        return;
+      }
+
+      await sendMessage(
+        contact.phone,
+        message
+      );
+
+      return;
+    }
+
+    // fluxo automático
     const {
       executionId,
       contactId,
