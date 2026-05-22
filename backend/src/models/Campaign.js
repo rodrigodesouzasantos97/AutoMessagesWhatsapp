@@ -22,6 +22,16 @@ const campaignSchema = new mongoose.Schema(
       required: true,
     },
 
+    totalContacts: {
+      type: Number,
+      default: 0,
+    },
+
+    processedContacts: {
+      type: Number,
+      default: 0,
+    },
+
     status: {
       type: String,
 

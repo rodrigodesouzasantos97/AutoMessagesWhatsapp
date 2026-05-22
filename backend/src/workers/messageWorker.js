@@ -6,6 +6,7 @@ import { messageQueue } from "../queues/messageQueue.js";
 import Contact from "../models/Contact.js";
 import FlowStep from "../models/FlowStep.js";
 import FlowExecution from "../models/FlowExecution.js";
+import Campaign from "../models/Campaign.js";
 
 import { sendMessage } from "../services/sendMessage.js";
 
@@ -35,6 +36,29 @@ export const worker = new Worker(
         contact.phone,
         message
       );
+
+      const campaign =
+        await Campaign.findById(
+          job.data.campaignId
+        );
+
+      if (campaign) {
+        campaign.processedContacts += 1;
+
+        // finaliza campanha
+        if (
+          campaign.processedContacts >=
+          campaign.totalContacts
+        ) {
+          campaign.status = "finished";
+
+          console.log(
+            `Campanha ${campaign.name} finalizada!`
+          );
+        }
+
+        await campaign.save();
+      }
 
       return;
     }

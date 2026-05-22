@@ -14,6 +14,8 @@ export const createCampaign = async (req, res) => {
       message,
       minDelay,
       maxDelay,
+      totalContacts: contactIds.length,
+      processedContacts: 0,
       status: "running",
     });
 
@@ -26,11 +28,8 @@ export const createCampaign = async (req, res) => {
 
         {
           type: "campaign",
-
           campaignId: campaign._id,
-
           contactId,
-
           message,
         },
 
