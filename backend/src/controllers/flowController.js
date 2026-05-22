@@ -1,5 +1,8 @@
 import Flow from "../models/Flow.js";
 import FlowStep from "../models/FlowStep.js";
+import FlowExecution from "../models/FlowExecution.js";
+
+import { messageQueue } from "../queues/messageQueue.js";
 
 export const createFlow = async (req, res) => {
   try {
@@ -36,6 +39,65 @@ export const createFlow = async (req, res) => {
 
     return res.status(500).json({
       msg: "Erro ao criar fluxo",
+    });
+  }
+};
+
+export const startFlow = async (
+  req,
+  res
+) => {
+  try {
+    const { flowId } = req.params;
+
+    const { contactIds } = req.body;
+
+    const firstStep =
+      await FlowStep.findOne({
+        flowId,
+        order: 1,
+      });
+
+    if (!firstStep) {
+      return res.status(404).json({
+        msg: "Fluxo sem primeira etapa",
+      });
+    }
+
+    for (const contactId of contactIds) {
+      // cria execução individual
+      const execution =
+        await FlowExecution.create({
+          contactId,
+          flowId,
+        });
+
+      // cria job
+      await messageQueue.add(
+        "send-flow-message",
+
+        {
+          executionId: execution._id,
+
+          contactId,
+
+          stepId: firstStep._id,
+        },
+
+        {
+          delay: 0,
+        }
+      );
+    }
+
+    return res.status(200).json({
+      msg: "Fluxo iniciado!",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      msg: "Erro ao iniciar fluxo",
     });
   }
 };
