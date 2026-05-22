@@ -1,9 +1,14 @@
 import { Router } from "express";
 
-import { createFlow } from "../controllers/flowController.js";
+import {
+  createFlow,
+  startFlow,
+} from "../controllers/flowController.js";
 
 const router = Router();
 
 router.post("/", createFlow);
+
+router.post("/:flowId/start", startFlow);
 
 export default router;
