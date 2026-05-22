@@ -22,11 +22,13 @@ const flowExecutionSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: [
+        "waiting",
         "running",
-        "finished",
         "paused",
+        "failed",
+        "finished",
       ],
-      default: "running",
+      default: "waiting",
     },
   },
   {
