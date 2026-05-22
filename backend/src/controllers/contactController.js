@@ -4,7 +4,18 @@ import csv from "csv-parser";
 
 import Contact from "../models/Contact.js";
 
-export const importContacts = async (req, res) => {
+const getContacts = async (req, res) => {
+  try {
+    const contacts = await Contact.find();
+
+    res.status(200).json(contacts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+const importContacts = async (req, res) => {
   try {
     const contacts = [];
 
@@ -35,3 +46,5 @@ export const importContacts = async (req, res) => {
     });
   }
 };
+
+export { getContacts, importContacts };

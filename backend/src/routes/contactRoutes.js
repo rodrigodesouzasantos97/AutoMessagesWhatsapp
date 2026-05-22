@@ -2,9 +2,14 @@ import { Router } from "express";
 
 import upload from "../config/multer.js";
 
-import { importContacts } from "../controllers/contactController.js";
+import {
+  importContacts,
+  getContacts,
+} from "../controllers/contactController.js";
 
 const router = Router();
+
+router.get("/", getContacts);
 
 router.post(
   "/import",
