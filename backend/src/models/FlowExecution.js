@@ -21,24 +21,15 @@ const flowExecutionSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: [
-        "waiting",
-        "running",
-        "paused",
-        "failed",
-        "finished",
-      ],
+      enum: ["waiting", "running", "paused", "failed", "finished"],
       default: "waiting",
     },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-const FlowExecution = mongoose.model(
-  "FlowExecution",
-  flowExecutionSchema
-);
+const FlowExecution = mongoose.model("FlowExecution", flowExecutionSchema);
 
 export default FlowExecution;

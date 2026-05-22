@@ -9,7 +9,7 @@ const flowSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Flow = mongoose.model("Flow", flowSchema);

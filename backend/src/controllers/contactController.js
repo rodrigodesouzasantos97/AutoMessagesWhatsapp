@@ -4,10 +4,7 @@ import csv from "csv-parser";
 
 import Contact from "../models/Contact.js";
 
-export const importContacts = async (
-  req,
-  res
-) => {
+export const importContacts = async (req, res) => {
   try {
     const contacts = [];
 
@@ -23,9 +20,7 @@ export const importContacts = async (
       })
 
       .on("end", async () => {
-        await Contact.insertMany(
-          contacts
-        );
+        await Contact.insertMany(contacts);
 
         return res.status(200).json({
           msg: "Contatos importados!",

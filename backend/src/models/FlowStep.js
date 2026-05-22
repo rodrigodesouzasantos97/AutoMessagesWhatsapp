@@ -25,12 +25,9 @@ const flowStepSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-const FlowStep = mongoose.model(
-  "FlowStep",
-  flowStepSchema
-);
+const FlowStep = mongoose.model("FlowStep", flowStepSchema);
 
 export default FlowStep;

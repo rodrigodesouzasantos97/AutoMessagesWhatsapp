@@ -2,9 +2,7 @@ import { Router } from "express";
 
 import upload from "../config/multer.js";
 
-import {
-  importContacts,
-} from "../controllers/contactController.js";
+import { importContacts } from "../controllers/contactController.js";
 
 const router = Router();
 
@@ -13,7 +11,7 @@ router.post(
 
   upload.single("file"),
 
-  importContacts
+  importContacts,
 );
 
 export default router;

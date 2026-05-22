@@ -23,8 +23,7 @@ export const createFlow = async (req, res) => {
     const formattedSteps = steps.map((step) => ({
       flowId: flow._id,
       order: step.order,
-      delayAfterPrevious:
-        step.delayAfterPrevious,
+      delayAfterPrevious: step.delayAfterPrevious,
       message: step.message,
     }));
 
@@ -43,20 +42,16 @@ export const createFlow = async (req, res) => {
   }
 };
 
-export const startFlow = async (
-  req,
-  res
-) => {
+export const startFlow = async (req, res) => {
   try {
     const { flowId } = req.params;
 
     const { contactIds } = req.body;
 
-    const firstStep =
-      await FlowStep.findOne({
-        flowId,
-        order: 1,
-      });
+    const firstStep = await FlowStep.findOne({
+      flowId,
+      order: 1,
+    });
 
     if (!firstStep) {
       return res.status(404).json({
@@ -66,11 +61,10 @@ export const startFlow = async (
 
     for (const contactId of contactIds) {
       // cria execução individual
-      const execution =
-        await FlowExecution.create({
-          contactId,
-          flowId,
-        });
+      const execution = await FlowExecution.create({
+        contactId,
+        flowId,
+      });
 
       // cria job
       await messageQueue.add(
@@ -86,7 +80,7 @@ export const startFlow = async (
 
         {
           delay: 0,
-        }
+        },
       );
     }
 
