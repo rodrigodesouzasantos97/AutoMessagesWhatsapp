@@ -5,7 +5,7 @@ let client = null;
 export const startWPP = async () => {
   client = await wppconnect.create({
     session: "whatsapp-session",
-    headless: false,
+    headless: true,
     autoClose: 0,
   });
 
