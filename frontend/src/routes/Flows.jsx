@@ -7,6 +7,10 @@ const Flows = () => {
 
   const [flows, setFlows] = useState([]);
 
+  const [contacts, setContacts] = useState([]);
+
+  const [selectedContacts, setSelectedContacts] = useState([]);
+
   const [steps, setSteps] = useState([
     {
       order: 1,
@@ -25,8 +29,20 @@ const Flows = () => {
     }
   };
 
+  const getContacts = async () => {
+    try {
+      const response = await api.get("/contacts");
+
+      setContacts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getFlows();
+
+    getContacts();
   }, []);
 
   const handleAddStep = () => {
@@ -58,7 +74,39 @@ const Flows = () => {
 
       alert("Fluxo criado!");
 
+      setName("");
+
+      setSteps([
+        {
+          order: 1,
+          message: "",
+          delayAfterPrevious: 0,
+        },
+      ]);
+
       getFlows();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelectContact = (contactId) => {
+    if (selectedContacts.includes(contactId)) {
+      setSelectedContacts(selectedContacts.filter((id) => id !== contactId));
+
+      return;
+    }
+
+    setSelectedContacts([...selectedContacts, contactId]);
+  };
+
+  const handleStartFlow = async (flowId) => {
+    try {
+      await api.post(`/flows/${flowId}/start`, {
+        contactIds: selectedContacts,
+      });
+
+      alert("Fluxo iniciado!");
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +167,26 @@ const Flows = () => {
 
       {flows.map((flow) => (
         <div key={flow._id}>
-          <p>{flow.name}</p>
+          <h3>{flow.name}</h3>
+
+          <h4>Selecionar contatos</h4>
+
+          {contacts.map((contact) => (
+            <div key={contact._id}>
+              <input
+                type="checkbox"
+                onChange={() => handleSelectContact(contact._id)}
+              />
+
+              {contact.name}
+            </div>
+          ))}
+
+          <br />
+
+          <button onClick={() => handleStartFlow(flow._id)}>
+            Iniciar fluxo
+          </button>
 
           <hr />
         </div>
