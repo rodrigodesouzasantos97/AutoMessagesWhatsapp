@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="home">
-      <h2>
-        <Link to="/">Auto Messages</Link>
-      </h2>
+      <i class="fa-brands fa-whatsapp"></i>
+      <h2>Auto Messages</h2>
       <ul>
         <li>
           <Link to="/contacts">Contatos</Link>
