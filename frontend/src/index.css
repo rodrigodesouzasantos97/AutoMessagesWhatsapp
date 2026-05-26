@@ -5,3 +5,44 @@
     font-family: "League Spartan", sans-serif;
 }
 
+a{
+    text-decoration: none;
+}
+
+input[type="file"]::file-selector-button{
+    font-family: "League Spartan", sans-serif;
+}
+
+button,
+input[type="file"]::file-selector-button {
+    padding: 0.4rem 0.3rem;
+    border: none;
+    border-radius: 5px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="file"]::file-selector-button{
+    opacity: 1;
+}
+
+textarea{
+    resize: none;
+    height: 100px;
+    width: 400px;
+    padding: 0.5rem;
+}
+
+input{
+    height: 30px;
+}
+
+input[type="number"]{
+    width: 60px;
+    padding-left: 0.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+}
