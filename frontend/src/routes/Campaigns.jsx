@@ -84,17 +84,11 @@ const Campaigns = () => {
         onChange={(e) => setName(e.target.value)}
       />
 
-      <br />
-      <br />
-
       <textarea
         placeholder="Mensagem"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-
-      <br />
-      <br />
 
       <input
         type="number"
@@ -110,8 +104,6 @@ const Campaigns = () => {
         onChange={(e) => setMaxDelay(e.target.value)}
       />
 
-      <hr />
-
       <h3>Selecionar contatos</h3>
 
       {contacts.map((contact) => (
@@ -125,27 +117,17 @@ const Campaigns = () => {
         </div>
       ))}
 
-      <br />
-
       <button onClick={handleCreateCampaign}>Criar campanha</button>
 
-      <hr />
-
       <h2>Campanhas</h2>
-
       {campaigns.map((campaign) => (
         <div key={campaign._id}>
           <p>Nome: {campaign.name}</p>
-
           <p>Status: {campaign.status}</p>
-
           <p>Mensagem: {campaign.message}</p>
-
           <p>
             Processados: {campaign.processedContacts}/{campaign.totalContacts}
           </p>
-
-          <hr />
         </div>
       ))}
     </div>

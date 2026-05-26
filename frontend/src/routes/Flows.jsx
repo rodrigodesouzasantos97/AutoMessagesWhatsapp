@@ -123,8 +123,6 @@ const Flows = () => {
         onChange={(e) => setName(e.target.value)}
       />
 
-      <hr />
-
       <h2>Etapas</h2>
 
       {steps.map((step, index) => (
@@ -137,8 +135,6 @@ const Flows = () => {
             onChange={(e) => handleChangeStep(index, "message", e.target.value)}
           />
 
-          <br />
-
           <input
             type="number"
             placeholder="Delay"
@@ -149,19 +145,12 @@ const Flows = () => {
           />
 
           <p>Delay após etapa anterior (segundos)</p>
-
-          <hr />
         </div>
       ))}
 
       <button onClick={handleAddStep}>Adicionar etapa</button>
 
-      <br />
-      <br />
-
       <button onClick={handleCreateFlow}>Criar fluxo</button>
-
-      <hr />
 
       <h2>Fluxos criados</h2>
 
@@ -182,13 +171,9 @@ const Flows = () => {
             </div>
           ))}
 
-          <br />
-
           <button onClick={() => handleStartFlow(flow._id)}>
             Iniciar fluxo
           </button>
-
-          <hr />
         </div>
       ))}
     </div>

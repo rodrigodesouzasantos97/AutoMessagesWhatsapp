@@ -44,7 +44,6 @@ const Contacts = () => {
   return (
     <div>
       <h1>Contatos</h1>
-
       <input
         type="file"
         accept=".csv"
@@ -53,15 +52,10 @@ const Contacts = () => {
 
       <button onClick={handleUpload}>Upload CSV</button>
 
-      <hr />
-
       {contacts.map((contact) => (
         <div key={contact._id}>
           <p>{contact.name}</p>
-
           <p>{contact.phone}</p>
-
-          <hr />
         </div>
       ))}
     </div>
