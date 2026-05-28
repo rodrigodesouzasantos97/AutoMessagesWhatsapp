@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
+import "./Home.css";
+
 const Home = () => {
   return (
     <div className="home">
       <i class="fa-brands fa-whatsapp"></i>
-      <h2>Auto Messages</h2>
-      <ul>
+      <h2>Mensagens automáticas</h2>
+      <ul className="links">
         <li>
           <Link to="/contacts">Contatos</Link>
         </li>
