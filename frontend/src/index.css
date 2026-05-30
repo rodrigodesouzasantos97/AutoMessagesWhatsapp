@@ -65,8 +65,8 @@ p {
 
 .back-button {
     position: absolute;
-    right: -30px;
-    top: -15px;
+    right: -40px;
+    top: -25px;
     background-color: #286e48;
     color: #ddd;
     padding: 0.4rem 0.3rem;
@@ -76,4 +76,20 @@ p {
 
 .back-button:hover{
     opacity: 1;
+}
+
+.contacts-container{
+    width: 100%;
+    max-height: 150px;
+    overflow-y: scroll;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.contact-checkbox{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 1rem;
 }
