@@ -57,3 +57,18 @@ input[type="number"]{
 p {
     font-size: 1.1rem;
 }
+
+.back-button {
+    position: absolute;
+    right: -30px;
+    top: -15px;
+    background-color: #286e48;
+    color: #ddd;
+    padding: 0.4rem 0.3rem;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+.back-button:hover{
+    opacity: 1;
+}
