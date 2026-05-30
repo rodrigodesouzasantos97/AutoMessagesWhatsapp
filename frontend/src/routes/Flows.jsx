@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { api } from "../services/api";
+
+import "./Flows.css";
 
 const Flows = () => {
   const [name, setName] = useState("");
@@ -113,63 +117,74 @@ const Flows = () => {
   };
 
   return (
-    <div>
-      <h1>Fluxos</h1>
+    <div className="flows">
+      <Link to="/" className="back-button">
+        Voltar
+      </Link>
 
-      <input
-        type="text"
-        placeholder="Nome do fluxo"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <div className="create-flow">
+        <h1>Fluxos</h1>
 
-      <h2>Etapas</h2>
+        <input
+          type="text"
+          placeholder="Nome do fluxo"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      {steps.map((step, index) => (
-        <div key={index}>
-          <p>Etapa {step.order}</p>
+        <h2>Etapas</h2>
 
-          <textarea
-            placeholder="Mensagem"
-            value={step.message}
-            onChange={(e) => handleChangeStep(index, "message", e.target.value)}
-          />
+        {steps.map((step, index) => (
+          <div className="steps" key={index}>
+            <p>Etapa {step.order}</p>
 
-          <input
-            type="number"
-            placeholder="Delay"
-            value={step.delayAfterPrevious}
-            onChange={(e) =>
-              handleChangeStep(index, "delayAfterPrevious", e.target.value)
-            }
-          />
+            <textarea
+              placeholder="Mensagem"
+              value={step.message}
+              onChange={(e) =>
+                handleChangeStep(index, "message", e.target.value)
+              }
+            />
 
-          <p>Delay após etapa anterior (segundos)</p>
-        </div>
-      ))}
+            <label>
+              <span>Delay após etapa anterior (segundos):</span>
+              <input
+                type="number"
+                placeholder="Delay"
+                value={step.delayAfterPrevious}
+                onChange={(e) =>
+                  handleChangeStep(index, "delayAfterPrevious", e.target.value)
+                }
+              />
+            </label>
+          </div>
+        ))}
 
-      <button onClick={handleAddStep}>Adicionar etapa</button>
+        <button onClick={handleAddStep}>Adicionar etapa</button>
 
-      <button onClick={handleCreateFlow}>Criar fluxo</button>
+        <button onClick={handleCreateFlow}>Criar fluxo</button>
+      </div>
 
       <h2>Fluxos criados</h2>
 
       {flows.map((flow) => (
-        <div key={flow._id}>
+        <div className="created-flow" key={flow._id}>
           <h3>{flow.name}</h3>
 
           <h4>Selecionar contatos</h4>
 
-          {contacts.map((contact) => (
-            <div key={contact._id}>
-              <input
-                type="checkbox"
-                onChange={() => handleSelectContact(contact._id)}
-              />
+          <div className="contacts-container">
+            {contacts.map((contact) => (
+              <div className="contact-checkbox" key={contact._id}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleSelectContact(contact._id)}
+                />
 
-              {contact.name}
-            </div>
-          ))}
+                {contact.name}
+              </div>
+            ))}
+          </div>
 
           <button onClick={() => handleStartFlow(flow._id)}>
             Iniciar fluxo
