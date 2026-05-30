@@ -119,9 +119,9 @@ const Campaigns = () => {
 
         <h3>Selecionar contatos</h3>
 
-        <div className="campaigns-contacts">
+        <div className="contacts-container">
           {contacts.map((contact) => (
-            <div className="campaigns-contact" key={contact._id}>
+            <div className="contact-checkbox" key={contact._id}>
               <input
                 type="checkbox"
                 onChange={() => handleSelectContact(contact._id)}
