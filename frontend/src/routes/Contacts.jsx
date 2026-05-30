@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { api } from "../services/api";
+
+import "./Contacts.css";
+import { formToJSON } from "axios";
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -42,19 +47,24 @@ const Contacts = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Contatos</h1>
-      <input
-        type="file"
-        accept=".csv"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
+    <div className="contacts">
+      <Link to="/" className="back-button">Voltar</Link>
 
-      <button onClick={handleUpload}>Upload CSV</button>
+      <div className="upload">
+        <input
+          type="file"
+          accept=".csv"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+
+        <button onClick={handleUpload}>Upload CSV</button>
+      </div>
+
+      <h1>Contatos</h1>
 
       {contacts.map((contact) => (
-        <div key={contact._id}>
-          <p>{contact.name}</p>
+        <div className="infos" key={contact._id}>
+          <p>{contact.name}:</p>
           <p>{contact.phone}</p>
         </div>
       ))}
