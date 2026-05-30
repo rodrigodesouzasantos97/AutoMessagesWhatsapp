@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import { api } from "../services/api";
+
+import "./Campaigns.css";
 
 const Campaigns = () => {
   const [contacts, setContacts] = useState([]);
@@ -74,62 +78,77 @@ const Campaigns = () => {
   };
 
   return (
-    <div>
-      <h1>Campanhas</h1>
+    <div className="campaigns">
+      <Link to="/" className="back-button">Voltar</Link>
 
-      <input
-        type="text"
-        placeholder="Nome da campanha"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <div className="create-campaign">
+        <input
+          type="text"
+          placeholder="Nome da campanha"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      <textarea
-        placeholder="Mensagem"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
+        <textarea
+          placeholder="Mensagem"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
 
-      <input
-        type="number"
-        placeholder="Delay mínimo"
-        value={minDelay}
-        onChange={(e) => setMinDelay(e.target.value)}
-      />
+        <div className="delay">
+          <label>
+            <span>Delay mínimo:</span>
+            <input
+              type="number"
+              placeholder="Delay mínimo"
+              value={minDelay}
+              onChange={(e) => setMinDelay(e.target.value)}
+            />
+          </label>
 
-      <input
-        type="number"
-        placeholder="Delay máximo"
-        value={maxDelay}
-        onChange={(e) => setMaxDelay(e.target.value)}
-      />
-
-      <h3>Selecionar contatos</h3>
-
-      {contacts.map((contact) => (
-        <div key={contact._id}>
-          <input
-            type="checkbox"
-            onChange={() => handleSelectContact(contact._id)}
-          />
-
-          {contact.name}
+          <label>
+            <span>Delay máximo:</span>
+            <input
+              type="number"
+              placeholder="Delay máximo"
+              value={maxDelay}
+              onChange={(e) => setMaxDelay(e.target.value)}
+            />
+          </label>
         </div>
-      ))}
 
-      <button onClick={handleCreateCampaign}>Criar campanha</button>
+        <h3>Selecionar contatos</h3>
+
+        <div className="campaigns-contacts">
+          {contacts.map((contact) => (
+            <div className="campaigns-contact" key={contact._id}>
+              <input
+                type="checkbox"
+                onChange={() => handleSelectContact(contact._id)}
+              />
+
+              {contact.name}
+            </div>
+          ))}
+        </div>
+
+        <button onClick={handleCreateCampaign}>Criar campanha</button>
+      </div>
 
       <h2>Campanhas</h2>
-      {campaigns.map((campaign) => (
-        <div key={campaign._id}>
-          <p>Nome: {campaign.name}</p>
-          <p>Status: {campaign.status}</p>
-          <p>Mensagem: {campaign.message}</p>
-          <p>
-            Processados: {campaign.processedContacts}/{campaign.totalContacts}
-          </p>
-        </div>
-      ))}
+
+      <div className="created-campaigns">
+        {campaigns.map((campaign) => (
+          <div className="created-campaign" key={campaign._id}>
+            <p>Nome: {campaign.name}</p>
+            <p>Status: {campaign.status}</p>
+            <p>Mensagem: {campaign.message}</p>
+            <p>
+              Processados: {campaign.processedContacts}/{campaign.totalContacts}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
