@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
   width: 400px;
   min-height: 400px;
   position: relative;
@@ -27,4 +27,5 @@
     display: flex;
     gap: 0.5rem;
     border-bottom: 1px solid #000;
+    padding-bottom: 1rem;
 }
