@@ -1,0 +1,52 @@
+.flows {
+  background-color: #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  min-height: 400px;
+  position: relative;
+}
+
+.create-flow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #000;
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 5px;
+}
+
+.steps{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid #000;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.steps label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.created-flow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100%;
+}
