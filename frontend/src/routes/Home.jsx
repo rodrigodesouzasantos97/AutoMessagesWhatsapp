@@ -5,7 +5,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home">
-      <i class="fa-brands fa-whatsapp"></i>
+      <i className="fa-brands fa-whatsapp"></i>
       <h2>Mensagens automáticas</h2>
       <ul className="links">
         <li>
