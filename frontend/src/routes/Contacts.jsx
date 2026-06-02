@@ -48,7 +48,9 @@ const Contacts = () => {
 
   return (
     <div className="contacts">
-      <Link to="/" className="back-button">Voltar</Link>
+      <Link to="/" className="back-button">
+        Voltar
+      </Link>
 
       <div className="upload">
         <input
@@ -66,6 +68,12 @@ const Contacts = () => {
         <div className="infos" key={contact._id}>
           <p>{contact.name}:</p>
           <p>{contact.phone}</p>
+          <button className="edit-button">
+            <i className="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button className="delete-button">
+            <i className="fa-solid fa-x"></i>
+          </button>
         </div>
       ))}
     </div>
