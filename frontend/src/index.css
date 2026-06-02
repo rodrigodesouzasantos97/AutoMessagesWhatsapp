@@ -93,3 +93,22 @@ p {
     gap: 0.5rem;
     padding-left: 1rem;
 }
+
+.edit-button,
+.delete-button{
+    position: absolute;
+    font-size: 0.85rem;
+    top: -15px;
+}
+
+.edit-button{
+    right: 20px;
+    background-color: #4b6324;
+    color: #fff;
+}
+
+.delete-button{
+    right: -15px;
+    background-color: #632424;
+    color: #fff;
+}
