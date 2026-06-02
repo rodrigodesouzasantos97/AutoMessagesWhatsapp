@@ -189,6 +189,12 @@ const Flows = () => {
           <button onClick={() => handleStartFlow(flow._id)}>
             Iniciar fluxo
           </button>
+          <button className="edit-button">
+            <i className="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button className="delete-button">
+            <i className="fa-solid fa-x"></i>
+          </button>
         </div>
       ))}
     </div>
