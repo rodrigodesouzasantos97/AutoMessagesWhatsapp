@@ -167,6 +167,12 @@ const Flows = () => {
 
       <h2>Fluxos criados</h2>
 
+      {flows.length === 0 && (
+        <p>
+          Você ainda não tem fluxos cadastrados{" "}
+          <i className="fa-solid fa-face-frown"></i>
+        </p>
+      )}
       {flows.map((flow) => (
         <div className="created-flow" key={flow._id}>
           <h3>{flow.name}</h3>

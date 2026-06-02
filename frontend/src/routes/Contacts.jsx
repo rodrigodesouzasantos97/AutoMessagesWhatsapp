@@ -64,6 +64,12 @@ const Contacts = () => {
 
       <h1>Contatos</h1>
 
+      {contacts.length === 0 && (
+        <p>
+          Você ainda não tem contatos cadastrados{" "}
+          <i className="fa-solid fa-face-frown"></i>
+        </p>
+      )}
       {contacts.map((contact) => (
         <div className="infos" key={contact._id}>
           <p>{contact.name}:</p>

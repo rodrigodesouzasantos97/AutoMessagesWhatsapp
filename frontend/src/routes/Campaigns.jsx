@@ -79,7 +79,9 @@ const Campaigns = () => {
 
   return (
     <div className="campaigns">
-      <Link to="/" className="back-button">Voltar</Link>
+      <Link to="/" className="back-button">
+        Voltar
+      </Link>
 
       <div className="create-campaign">
         <input
@@ -137,6 +139,12 @@ const Campaigns = () => {
 
       <h2>Campanhas</h2>
 
+      {campaigns.length === 0 && (
+        <p>
+          Você ainda não tem campanhas cadastradas{" "}
+          <i className="fa-solid fa-face-frown"></i>
+        </p>
+      )}
       <div className="created-campaigns">
         {campaigns.map((campaign) => (
           <div className="created-campaign" key={campaign._id}>
