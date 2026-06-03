@@ -29,6 +29,10 @@
     gap: 1rem;
 }
 
+.create-campaign input[type="text"] {
+    width: 100%;
+}
+
 .create-campaign label {
     display: flex;
     gap: 0.5rem;

@@ -23,6 +23,10 @@
     border-radius: 5px;
 }
 
+.create-flow input[type="text"]{
+    width: 100%;
+}
+
 .steps{
     display: flex;
     flex-direction: column;
