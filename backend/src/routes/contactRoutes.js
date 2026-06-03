@@ -5,6 +5,7 @@ import upload from "../config/multer.js";
 import {
   importContacts,
   getContacts,
+  getContact,
   deleteContact,
   updateContact,
 } from "../controllers/contactController.js";
@@ -12,6 +13,8 @@ import {
 const router = Router();
 
 router.get("/", getContacts);
+
+router.get("/:id", getContact);
 
 router.post(
   "/import",

@@ -15,6 +15,23 @@ const getContacts = async (req, res) => {
   }
 };
 
+const getContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const contact = await Contact.findById(id);
+
+    if (!contact) {
+      res.status(404).json({ msg: "Contato não encontrado!" });
+    }
+
+    res.status(200).json(contact);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
 const importContacts = async (req, res) => {
   try {
     const contacts = [];
@@ -53,7 +70,7 @@ const deleteContact = async (req, res) => {
 
     const contact = await Contact.findByIdAndDelete(id);
 
-    if(!contact){
+    if (!contact) {
       res.status(404).json({ msg: "Contato não encontrado!" });
     }
 
@@ -71,11 +88,11 @@ const updateContact = async (req, res) => {
     const contact = {
       name,
       phone,
-    }
+    };
 
-    const updatedContact= await Contact.findByIdAndUpdate(id, contact);
+    const updatedContact = await Contact.findByIdAndUpdate(id, contact);
 
-    if(!updatedContact){
+    if (!updatedContact) {
       res.status(404).json({ msg: "Contato não encontrado!" });
     }
 
@@ -86,5 +103,10 @@ const updateContact = async (req, res) => {
   }
 };
 
-
-export { getContacts, importContacts, deleteContact, updateContact };
+export {
+  getContacts,
+  getContact,
+  importContacts,
+  deleteContact,
+  updateContact,
+};
