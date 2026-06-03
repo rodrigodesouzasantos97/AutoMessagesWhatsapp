@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { api } from "../services/api";
 
@@ -8,6 +8,8 @@ import "./Contacts.css";
 import { formToJSON } from "axios";
 
 const Contacts = () => {
+  const navigate = useNavigate();
+
   const [contacts, setContacts] = useState([]);
 
   const [file, setFile] = useState(null);
@@ -84,7 +86,10 @@ const Contacts = () => {
         <div className="infos" key={contact._id}>
           <p>{contact.name}</p>
           <p>{contact.phone}</p>
-          <button className="edit-button">
+          <button
+            onClick={() => navigate(`/contacts/${contact._id}`)}
+            className="edit-button"
+          >
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
           <button

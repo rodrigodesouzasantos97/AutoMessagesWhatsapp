@@ -9,6 +9,7 @@ import Home from "./routes/Home.jsx";
 import Contacts from "./routes/Contacts.jsx";
 import Campaigns from "./routes/Campaigns.jsx";
 import Flows from "./routes/Flows.jsx";
+import UpdateContact from "./routes/UpdateContact.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/contacts",
         element: <Contacts />,
+      },
+      {
+        path: "/contacts/:id",
+        element: <UpdateContact />,
       },
       {
         path: "/campaigns",
