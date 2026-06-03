@@ -5,6 +5,7 @@ import upload from "../config/multer.js";
 import {
   importContacts,
   getContacts,
+  deleteContact,
 } from "../controllers/contactController.js";
 
 const router = Router();
@@ -18,5 +19,7 @@ router.post(
 
   importContacts,
 );
+
+router.delete("/:id", deleteContact);
 
 export default router;

@@ -42,6 +42,16 @@ const Contacts = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/contacts/${id}`);
+
+      getContacts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getContacts();
   }, []);
@@ -77,7 +87,10 @@ const Contacts = () => {
           <button className="edit-button">
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
-          <button className="delete-button">
+          <button
+            onClick={() => handleDelete(contact._id)}
+            className="delete-button"
+          >
             <i class="fa-solid fa-trash"></i>
           </button>
         </div>
