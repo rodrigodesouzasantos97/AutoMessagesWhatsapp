@@ -78,7 +78,7 @@ const Contacts = () => {
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
           <button className="delete-button">
-            <i className="fa-solid fa-x"></i>
+            <i class="fa-solid fa-trash"></i>
           </button>
         </div>
       ))}
