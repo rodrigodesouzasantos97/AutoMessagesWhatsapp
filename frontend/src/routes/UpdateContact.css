@@ -1,0 +1,28 @@
+.update-contact{  
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 400px;
+}
+
+.update-contact-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.update-contact-form input {
+    width: 70%;
+}
+
+.update-contact-form button {
+    width: 30%;
+}
