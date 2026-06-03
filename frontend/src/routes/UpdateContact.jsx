@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
+import "./UpdateContact.css"
+
 const UpdateContact = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -46,8 +48,8 @@ const UpdateContact = () => {
 
   return (
     <div className="update-contact">
-      <h1>Atualizar o contato: {name}</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <h1>Atualizar contato</h1>
+      <form className="update-contact-form" onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
           name="name"
@@ -62,7 +64,7 @@ const UpdateContact = () => {
           value={phone || ""}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <input type="submit" value="Atualizar" />
+        <button>Atualizar</button>
       </form>
     </div>
   );
