@@ -6,6 +6,7 @@ import {
   importContacts,
   getContacts,
   deleteContact,
+  updateContact,
 } from "../controllers/contactController.js";
 
 const router = Router();
@@ -21,5 +22,7 @@ router.post(
 );
 
 router.delete("/:id", deleteContact);
+
+router.patch("/:id", updateContact);
 
 export default router;

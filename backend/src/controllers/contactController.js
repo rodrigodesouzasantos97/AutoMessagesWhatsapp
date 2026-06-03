@@ -64,4 +64,27 @@ const deleteContact = async (req, res) => {
   }
 };
 
-export { getContacts, importContacts, deleteContact };
+const updateContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, phone } = req.body;
+    const contact = {
+      name,
+      phone,
+    }
+
+    const updatedContact= await Contact.findByIdAndUpdate(id, contact);
+
+    if(!updatedContact){
+      res.status(404).json({ msg: "Contato não encontrado!" });
+    }
+
+    res.status(200).json(updatedContact);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+
+export { getContacts, importContacts, deleteContact, updateContact };
