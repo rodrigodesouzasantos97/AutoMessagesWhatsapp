@@ -15,6 +15,23 @@ const getFlows = async (req, res) => {
   }
 };
 
+const getFlow = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const flow = await Flow.findById(id);
+
+    if (!flow) {
+      res.status(404).json({ msg: "Fluxo não encontrado" });
+    }
+
+    res.status(200).json(flow);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
 const createFlow = async (req, res) => {
   try {
     const { name, steps } = req.body;
@@ -107,4 +124,4 @@ const startFlow = async (req, res) => {
   }
 };
 
-export { startFlow, createFlow, getFlows };
+export { startFlow, createFlow, getFlows, getFlow };
