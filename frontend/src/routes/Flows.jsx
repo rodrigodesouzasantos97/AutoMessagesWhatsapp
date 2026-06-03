@@ -199,7 +199,7 @@ const Flows = () => {
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
           <button className="delete-button">
-            <i class="fa-solid fa-trash"></i>
+            <i className="fa-solid fa-trash"></i>
           </button>
         </div>
       ))}

@@ -82,7 +82,7 @@ const Contacts = () => {
       )}
       {contacts.map((contact) => (
         <div className="infos" key={contact._id}>
-          <p>{contact.name}:</p>
+          <p>{contact.name}</p>
           <p>{contact.phone}</p>
           <button className="edit-button">
             <i className="fa-solid fa-pen-to-square"></i>
@@ -91,7 +91,7 @@ const Contacts = () => {
             onClick={() => handleDelete(contact._id)}
             className="delete-button"
           >
-            <i class="fa-solid fa-trash"></i>
+            <i className="fa-solid fa-trash"></i>
           </button>
         </div>
       ))}
