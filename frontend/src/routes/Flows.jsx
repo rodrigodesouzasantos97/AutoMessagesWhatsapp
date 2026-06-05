@@ -26,7 +26,6 @@ const Flows = () => {
   const getFlows = async () => {
     try {
       const response = await api.get("/flows");
-
       setFlows(response.data);
     } catch (error) {
       console.log(error);
@@ -61,6 +60,17 @@ const Flows = () => {
     ]);
   };
 
+  const handleDeleteStep = (indexToDelete) => {
+    const filteredSteps = steps.filter((_, index) => index !== indexToDelete);
+
+    const updatedSteps = filteredSteps.map((step, index) => ({
+      ...step,
+      order: index + 1,
+    }));
+
+    setSteps(updatedSteps);
+  };
+
   const handleChangeStep = (index, field, value) => {
     const updatedSteps = [...steps];
 
@@ -70,6 +80,8 @@ const Flows = () => {
   };
 
   const handleCreateFlow = async () => {
+    if(steps.length === 0) return;
+
     try {
       await api.post("/flows", {
         name,
@@ -136,6 +148,12 @@ const Flows = () => {
 
         {steps.map((step, index) => (
           <div className="steps" key={index}>
+            <button
+              onClick={() => handleDeleteStep(index)}
+              className="delete-button"
+            >
+              <i className="fa-solid fa-trash"></i>
+            </button>
             <p>Etapa {step.order}</p>
 
             <textarea
