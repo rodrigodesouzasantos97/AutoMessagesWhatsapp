@@ -15,7 +15,9 @@ const Flows = () => {
 
   const [selectedContacts, setSelectedContacts] = useState([]);
 
-  const [steps, setSteps] = useState([
+  const [steps, setSteps] = useState([]);
+
+  const [stepsToAdd, setStepsToAdd] = useState([
     {
       order: 1,
       message: "",
@@ -27,6 +29,15 @@ const Flows = () => {
     try {
       const response = await api.get("/flows");
       setFlows(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSteps = async () => {
+    try {
+      const steps = await api.get("/flows/steps/");
+      setSteps(steps.data);
     } catch (error) {
       console.log(error);
     }
@@ -45,15 +56,17 @@ const Flows = () => {
   useEffect(() => {
     getFlows();
 
+    getSteps();
+
     getContacts();
   }, []);
 
   const handleAddStep = () => {
-    setSteps([
-      ...steps,
+    setStepsToAdd([
+      ...stepsToAdd,
 
       {
-        order: steps.length + 1,
+        order: stepsToAdd.length + 1,
         message: "",
         delayAfterPrevious: 0,
       },
@@ -61,38 +74,40 @@ const Flows = () => {
   };
 
   const handleDeleteStep = (indexToDelete) => {
-    const filteredSteps = steps.filter((_, index) => index !== indexToDelete);
+    const filteredSteps = stepsToAdd.filter(
+      (_, index) => index !== indexToDelete,
+    );
 
     const updatedSteps = filteredSteps.map((step, index) => ({
       ...step,
       order: index + 1,
     }));
 
-    setSteps(updatedSteps);
+    setStepsToAdd(updatedSteps);
   };
 
   const handleChangeStep = (index, field, value) => {
-    const updatedSteps = [...steps];
+    const updatedSteps = [...stepsToAdd];
 
     updatedSteps[index][field] = value;
 
-    setSteps(updatedSteps);
+    setStepsToAdd(updatedSteps);
   };
 
   const handleCreateFlow = async () => {
-    if(steps.length === 0) return;
+    if (stepsToAdd.length === 0) return;
 
     try {
       await api.post("/flows", {
         name,
-        steps,
+        stepsToAdd,
       });
 
       alert("Fluxo criado!");
 
       setName("");
 
-      setSteps([
+      setStepsToAdd([
         {
           order: 1,
           message: "",
@@ -146,7 +161,7 @@ const Flows = () => {
 
         <h2>Etapas</h2>
 
-        {steps.map((step, index) => (
+        {stepsToAdd.map((step, index) => (
           <div className="steps" key={index}>
             <button
               onClick={() => handleDeleteStep(index)}
@@ -194,6 +209,17 @@ const Flows = () => {
       {flows.map((flow) => (
         <div className="created-flow" key={flow._id}>
           <h3>{flow.name}</h3>
+
+          <h4>Etapas</h4>
+
+          {steps
+            .filter((step) => step.flowId === flow._id)
+            .map((step) => (
+              <div className="flow-steps" key={step._id}>
+                <p>{step.message}</p>
+                <p>Delay após a etapa: {step.delayAfterPrevious}</p>
+              </div>
+            ))}
 
           <h4>Selecionar contatos</h4>
 
