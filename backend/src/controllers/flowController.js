@@ -137,4 +137,15 @@ const getFlowSteps = async (req, res) => {
   }
 };
 
-export { startFlow, createFlow, getFlows, getFlow, getFlowSteps };
+const getSteps = async (req, res) => {
+  try {
+    const steps = await FlowStep.find();
+
+    res.status(200).json(steps);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+export { startFlow, createFlow, getFlows, getFlow, getFlowSteps, getSteps };

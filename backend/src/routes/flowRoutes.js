@@ -5,16 +5,20 @@ import {
   startFlow,
   getFlows,
   getFlow,
-  getFlowSteps
+  getFlowSteps,
+  getSteps
 } from "../controllers/flowController.js";
 
 const router = Router();
 
 router.get("/", getFlows);
 
+router.get("/steps", getSteps);
+
 router.get("/:flowId/steps", getFlowSteps);
 
 router.get("/:id", getFlow);
+
 
 router.post("/", createFlow);
 
