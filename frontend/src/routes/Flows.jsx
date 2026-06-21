@@ -217,7 +217,7 @@ const Flows = () => {
             .map((step) => (
               <div className="flow-steps" key={step._id}>
                 <p>{step.message}</p>
-                <p>Delay após a etapa: {step.delayAfterPrevious}</p>
+                <p>Delay após a etapa: {step.delayAfterPrevious} s</p>
               </div>
             ))}
 
