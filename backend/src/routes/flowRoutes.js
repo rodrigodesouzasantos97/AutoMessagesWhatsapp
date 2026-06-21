@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   createFlow,
+  deleteFlow,
   startFlow,
   getFlows,
   getFlow,
@@ -19,6 +20,7 @@ router.get("/:flowId/steps", getFlowSteps);
 
 router.get("/:id", getFlow);
 
+router.delete("/:id", deleteFlow);
 
 router.post("/", createFlow);
 

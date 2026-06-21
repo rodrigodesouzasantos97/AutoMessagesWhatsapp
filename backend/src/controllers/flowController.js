@@ -3,6 +3,7 @@ import FlowStep from "../models/FlowStep.js";
 import FlowExecution from "../models/FlowExecution.js";
 
 import { messageQueue } from "../queues/messageQueue.js";
+import { tryCatch } from "bullmq";
 
 const getFlows = async (req, res) => {
   try {
@@ -124,6 +125,23 @@ const startFlow = async (req, res) => {
   }
 };
 
+const deleteFlow = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const flow = await Flow.findByIdAndDelete(id);
+
+    if (!flow) {
+      res.status(404).json({ msg: "Fluxo não encontrado" });
+    }
+
+    res.status(200).json(flow);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
 const getFlowSteps = async (req, res) => {
   try {
     const { flowId } = req.params;
@@ -148,4 +166,4 @@ const getSteps = async (req, res) => {
   }
 };
 
-export { startFlow, createFlow, getFlows, getFlow, getFlowSteps, getSteps };
+export { startFlow, createFlow, deleteFlow, getFlows, getFlow, getFlowSteps, getSteps };
