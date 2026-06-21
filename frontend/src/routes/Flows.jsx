@@ -100,7 +100,7 @@ const Flows = () => {
     try {
       await api.post("/flows", {
         name,
-        stepsToAdd,
+        steps: stepsToAdd,
       });
 
       alert("Fluxo criado!");
@@ -116,6 +116,7 @@ const Flows = () => {
       ]);
 
       getFlows();
+      getSteps();
     } catch (error) {
       console.log(error);
     }
