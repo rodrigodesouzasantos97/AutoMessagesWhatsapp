@@ -144,6 +144,18 @@ const Flows = () => {
     }
   };
 
+  const handleDeleteFlow = async (id) => {
+    try {
+      await api.delete(`/flows/${id}`)
+
+      alert("Fluxo deletado!");
+
+      getFlows();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="flows">
       <Link to="/" className="back-button">
@@ -243,7 +255,7 @@ const Flows = () => {
           <button className="edit-button">
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
-          <button className="delete-button">
+          <button onClick={() => handleDeleteFlow(flow._id)} className="delete-button">
             <i className="fa-solid fa-trash"></i>
           </button>
         </div>
