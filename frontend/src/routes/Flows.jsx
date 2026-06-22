@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { api } from "../services/api";
 
 import "./Flows.css";
 
 const Flows = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
 
   const [flows, setFlows] = useState([]);
@@ -252,7 +254,7 @@ const Flows = () => {
           <button onClick={() => handleStartFlow(flow._id)}>
             Iniciar fluxo
           </button>
-          <button className="edit-button">
+          <button onClick={() => navigate(`/flows/${flow._id}`)} className="edit-button">
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
           <button onClick={() => handleDeleteFlow(flow._id)} className="delete-button">
