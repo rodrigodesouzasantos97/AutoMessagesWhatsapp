@@ -10,6 +10,7 @@ import Contacts from "./routes/Contacts.jsx";
 import Campaigns from "./routes/Campaigns.jsx";
 import Flows from "./routes/Flows.jsx";
 import UpdateContact from "./routes/UpdateContact.jsx";
+import UpdateFlow from "./routes/UpdateFlow.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/flows",
         element: <Flows />,
+      },
+      {
+        path: "/flows/:id",
+        element: <UpdateFlow />,
       },
     ],
   },
