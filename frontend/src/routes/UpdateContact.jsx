@@ -1,6 +1,6 @@
 import { api } from "../services/api";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
@@ -48,6 +48,9 @@ const UpdateContact = () => {
 
   return (
     <div className="update-contact">
+      <Link to="/contacts" className="back-button">
+        Voltar
+      </Link>
       <h1>Atualizar contato</h1>
       <form className="update-contact-form" onSubmit={(e) => handleSubmit(e)}>
         <input

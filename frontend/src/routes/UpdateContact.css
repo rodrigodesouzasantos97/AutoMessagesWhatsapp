@@ -8,6 +8,7 @@
     justify-content: center;
     gap: 2rem;
     width: 400px;
+    position: relative;
 }
 
 .update-contact-form {
