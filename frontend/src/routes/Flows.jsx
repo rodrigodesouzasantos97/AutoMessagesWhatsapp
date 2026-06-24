@@ -147,16 +147,25 @@ const Flows = () => {
   };
 
   const handleDeleteFlow = async (id) => {
+    const filteredSteps = steps.filter((step) => step.flowId === id);
+
     try {
-      await api.delete(`/flows/${id}`)
+      await Promise.all(
+        filteredSteps.map((step) => {
+          api.delete(`/flows/steps/${step._id}`);
+        }),
+      );
+
+      await api.delete(`/flows/${id}`);
 
       alert("Fluxo deletado!");
 
       getFlows();
+      getSteps();
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="flows">
@@ -255,10 +264,16 @@ const Flows = () => {
           <button onClick={() => handleStartFlow(flow._id)}>
             Iniciar fluxo
           </button>
-          <button onClick={() => navigate(`/flows/${flow._id}`)} className="edit-button">
+          <button
+            onClick={() => navigate(`/flows/${flow._id}`)}
+            className="edit-button"
+          >
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
-          <button onClick={() => handleDeleteFlow(flow._id)} className="delete-button">
+          <button
+            onClick={() => handleDeleteFlow(flow._id)}
+            className="delete-button"
+          >
             <i className="fa-solid fa-trash"></i>
           </button>
         </div>
