@@ -7,7 +7,8 @@ import {
   getFlows,
   getFlow,
   getFlowSteps,
-  getSteps
+  getSteps,
+  updateStep
 } from "../controllers/flowController.js";
 
 const router = Router();
@@ -26,5 +27,6 @@ router.post("/", createFlow);
 
 router.post("/:flowId/start", startFlow);
 
+router.patch("/steps/:id", updateStep);
 
 export default router;

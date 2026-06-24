@@ -166,4 +166,37 @@ const getSteps = async (req, res) => {
   }
 };
 
-export { startFlow, createFlow, deleteFlow, getFlows, getFlow, getFlowSteps, getSteps };
+const updateStep = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { delayAfterPrevious, message } = req.body;
+
+    const step = {
+      delayAfterPrevious,
+      message,
+    };
+
+    const updatedStep = await FlowStep.findByIdAndUpdate(id, step);
+
+    if (!updatedStep) {
+      res.status(404).json({ msg: "Etapa não encontrada!" });
+    }
+
+    res.status(200).json({ msg: "Etapa atualizada com sucesso!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
+export {
+  startFlow,
+  createFlow,
+  deleteFlow,
+  getFlows,
+  getFlow,
+  getFlowSteps,
+  getSteps,
+  updateStep,
+};
