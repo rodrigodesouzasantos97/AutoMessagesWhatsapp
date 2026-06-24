@@ -190,6 +190,23 @@ const updateStep = async (req, res) => {
   }
 };
 
+const deleteStep = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const step = await FlowStep.findByIdAndDelete(id);
+
+    if (!step) {
+      res.status(404).json({ msg: "Etapa não encontrada!" });
+    }
+
+    res.status(200).json({ msg: "Etapa apagada com sucesso!" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Ocorreu um erro!" });
+  }
+};
+
 export {
   startFlow,
   createFlow,
@@ -199,4 +216,5 @@ export {
   getFlowSteps,
   getSteps,
   updateStep,
+  deleteStep,
 };

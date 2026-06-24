@@ -8,7 +8,8 @@ import {
   getFlow,
   getFlowSteps,
   getSteps,
-  updateStep
+  updateStep,
+  deleteStep,
 } from "../controllers/flowController.js";
 
 const router = Router();
@@ -22,6 +23,8 @@ router.get("/:flowId/steps", getFlowSteps);
 router.get("/:id", getFlow);
 
 router.delete("/:id", deleteFlow);
+
+router.delete("/steps/:id", deleteStep);
 
 router.post("/", createFlow);
 
