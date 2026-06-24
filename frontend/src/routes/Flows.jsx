@@ -229,6 +229,7 @@ const Flows = () => {
 
           {steps
             .filter((step) => step.flowId === flow._id)
+            .sort((a, b) => a.order - b.order)
             .map((step) => (
               <div className="flow-steps" key={step._id}>
                 <p>{step.message}</p>
