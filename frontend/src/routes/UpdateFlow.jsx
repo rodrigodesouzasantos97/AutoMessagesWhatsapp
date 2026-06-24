@@ -1,16 +1,19 @@
 import { api } from "../services/api";
 
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
 import "./UpdateFlow.css";
 
 const UpdateFlow = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const [name, setName] = useState();
   const [steps, setSteps] = useState([]);
+  const [previousSteps, setPreviousSteps] = useState([]);
 
   const getFlow = async () => {
     try {
@@ -25,6 +28,7 @@ const UpdateFlow = () => {
     try {
       const response = await api.get(`/flows/${id}/steps`);
       setSteps(response.data);
+      setPreviousSteps(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -57,9 +61,31 @@ const UpdateFlow = () => {
     setSteps(updatedSteps);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const filteredSteps = steps.filter(
+      (step, index) =>
+        step.delayAfterPrevious !== previousSteps[index].delayAfterPrevious ||
+      step.message !== previousSteps[index].message,
+    );
+    
+    if (filteredSteps.length === 0) return;
+    
+    try {
+      await Promise.all(
+        filteredSteps.map((step) => {
+          api.patch(`/flows/steps/${step._id}`, {
+            delayAfterPrevious: step.delayAfterPrevious,
+            message: step.message,
+          });
+        }),
+      );
+    } catch (error) {
+      console.log(error);
+    }
 
+    navigate("/flows");
   };
 
   return (
