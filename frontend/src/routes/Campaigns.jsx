@@ -77,6 +77,20 @@ const Campaigns = () => {
     }
   };
 
+  useEffect(() => {
+    const hasRunningCampaign = campaigns.some(
+      (campaign) => campaign.status === "running",
+    );
+
+    if (!hasRunningCampaign) return;
+
+    const interval = setInterval(() => {
+      getCampaigns();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [campaigns]);
+
   return (
     <div className="campaigns">
       <Link to="/" className="back-button">
