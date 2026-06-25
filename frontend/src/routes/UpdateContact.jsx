@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-import "./UpdateContact.css"
+import "./UpdateContact.css";
 
 const UpdateContact = () => {
   const navigate = useNavigate();
@@ -59,6 +59,7 @@ const UpdateContact = () => {
           placeholder="Digite um nome"
           value={name || ""}
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <input
           type="number"
@@ -66,6 +67,7 @@ const UpdateContact = () => {
           placeholder="Digite um número de telefone"
           value={phone || ""}
           onChange={(e) => setPhone(e.target.value)}
+          required
         />
         <button>Atualizar</button>
       </form>
