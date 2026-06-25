@@ -96,7 +96,9 @@ const Flows = () => {
     setStepsToAdd(updatedSteps);
   };
 
-  const handleCreateFlow = async () => {
+  const handleCreateFlow = async (e) => {
+    e.preventDefault();
+
     if (stepsToAdd.length === 0) return;
 
     try {
@@ -173,14 +175,15 @@ const Flows = () => {
         Voltar
       </Link>
 
-      <div className="create-flow">
-        <h1>Fluxos</h1>
+      <form onSubmit={handleCreateFlow} className="create-flow">
+        <h1>Fluxo</h1>
 
         <input
           type="text"
           placeholder="Nome do fluxo"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
 
         <h2>Etapas</h2>
@@ -188,6 +191,7 @@ const Flows = () => {
         {stepsToAdd.map((step, index) => (
           <div className="steps" key={index}>
             <button
+              type="button"
               onClick={() => handleDeleteStep(index)}
               className="delete-button"
             >
@@ -201,6 +205,7 @@ const Flows = () => {
               onChange={(e) =>
                 handleChangeStep(index, "message", e.target.value)
               }
+              required
             />
 
             <label>
@@ -212,15 +217,18 @@ const Flows = () => {
                 onChange={(e) =>
                   handleChangeStep(index, "delayAfterPrevious", e.target.value)
                 }
+                required
               />
             </label>
           </div>
         ))}
 
-        <button onClick={handleAddStep}>Adicionar etapa</button>
+        <button type="button" onClick={handleAddStep}>
+          Adicionar etapa
+        </button>
 
-        <button onClick={handleCreateFlow}>Criar fluxo</button>
-      </div>
+        <button type="submit">Criar fluxo</button>
+      </form>
 
       <h2>Fluxos criados</h2>
 

@@ -57,7 +57,11 @@ const Campaigns = () => {
     setSelectedContacts([...selectedContacts, contactId]);
   };
 
-  const handleCreateCampaign = async () => {
+  const handleCreateCampaign = async (e) => {
+    e.preventDefault();
+
+    if(selectedContacts.length === 0) return;
+
     try {
       await api.post("/campaigns", {
         name,
@@ -97,18 +101,20 @@ const Campaigns = () => {
         Voltar
       </Link>
 
-      <div className="create-campaign">
+      <form onSubmit={handleCreateCampaign} className="create-campaign">
         <input
           type="text"
           placeholder="Nome da campanha"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
 
         <textarea
           placeholder="Mensagem"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          required
         />
 
         <div className="delay">
@@ -119,6 +125,7 @@ const Campaigns = () => {
               placeholder="Delay mínimo"
               value={minDelay}
               onChange={(e) => setMinDelay(e.target.value)}
+              required
             />
           </label>
 
@@ -129,6 +136,7 @@ const Campaigns = () => {
               placeholder="Delay máximo"
               value={maxDelay}
               onChange={(e) => setMaxDelay(e.target.value)}
+              required
             />
           </label>
         </div>
@@ -140,7 +148,7 @@ const Campaigns = () => {
             <div className="contact-checkbox" key={contact._id}>
               <input
                 type="checkbox"
-                onChange={() => handleSelectContact(contact._id)}
+                onChange={() => handleSelectContact(contact._id)}                
               />
 
               {contact.name}
@@ -148,8 +156,8 @@ const Campaigns = () => {
           ))}
         </div>
 
-        <button onClick={handleCreateCampaign}>Criar campanha</button>
-      </div>
+        <button>Criar campanha</button>
+      </form>
 
       <h2>Campanhas</h2>
 
